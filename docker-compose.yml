@@ -51,6 +51,39 @@ services:
       timeout: 5s
     restart: unless-stopped
 
+  blender-worker:
+    build: .
+    working_dir: /tmp
+    volumes:
+      - .:/tmp
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - CONVERT_QUEUE=convert:jobs
+      - CONVERT_RESULT_QUEUE=convert:results
+      - CONVERT_TIMEOUT=600
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  blender:
+    build:
+      context: .
+      dockerfile: docker/blender/Dockerfile
+    platform: "linux/amd64"
+    working_dir: /tmp
+    volumes:
+      - ./blender:/tmp/blender
+      - ./storage/app/private:/tmp/storage/app/private
+    command:
+      - blender
+      - -b
+      - --python
+      - convert.py
+      - --
+      - /tmp/cabinet.obj
+      - /tmp/cabinet.glb
+
 volumes:
   pgdata:
   redis:
