@@ -52,7 +52,10 @@ services:
     restart: unless-stopped
 
   blender-worker:
-    build: .
+    build:
+      context: .
+      dockerfile: docker/blender/Dockerfile
+    # platform: "linux/amd64"
     working_dir: /tmp
     volumes:
       - .:/tmp
@@ -66,23 +69,14 @@ services:
         condition: service_healthy
     restart: unless-stopped
 
-  blender:
-    build:
-      context: .
-      dockerfile: docker/blender/Dockerfile
-    platform: "linux/amd64"
-    working_dir: /tmp
-    volumes:
-      - ./blender:/tmp/blender
-      - ./storage/app/private:/tmp/storage/app/private
-    command:
-      - blender
-      - -b
-      - --python
-      - convert.py
-      - --
-      - /tmp/cabinet.obj
-      - /tmp/cabinet.glb
+  redis-commander:
+    image: ghcr.io/joeferner/redis-commander:latest
+    ports:
+      - "8081:8081"
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    depends_on:
+      - redis
 
 volumes:
   pgdata:

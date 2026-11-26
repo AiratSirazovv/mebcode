@@ -16,7 +16,7 @@ RESULT_QUEUE = os.environ.get("CONVERT_RESULT_QUEUE", "convert:results")
 STATUS_PREFIX = os.environ.get("CONVERT_STATUS_PREFIX", "convert:job:")
 DEFAULT_INPUT = os.environ.get("CONVERT_DEFAULT_INPUT", "/tmp/cabinet.obj")
 DEFAULT_OUTPUT = os.environ.get("CONVERT_DEFAULT_OUTPUT", "/tmp/cabinet.glb")
-CONVERT_SCRIPT = os.environ.get("CONVERT_SCRIPT", "/tmp/convert.py")
+CONVERT_SCRIPT = os.environ.get("CONVERT_SCRIPT", "/tmp/blender/convert.py")
 TIMEOUT = int(os.environ.get("CONVERT_TIMEOUT", "600"))
 
 _stop = False

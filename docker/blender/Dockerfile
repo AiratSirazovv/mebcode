@@ -36,4 +36,4 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /tmp
 
-CMD ["python3", "-u", "/tmp/worker.py"]
+CMD ["python3", "-u", "/tmp/blender/worker.py"]
