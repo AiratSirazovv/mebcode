@@ -2,7 +2,8 @@ FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     BLENDER_VERSION=5.2.3 \
-    BLENDER_SHA256=78486c018b4443efe5e75ab54c290ed8c15abafd249b862c2c9ce2530a918eec
+    BLENDER_SHA256=78486c018b4443efe5e75ab54c290ed8c15abafd249b862c2c9ce2530a918eec \
+    PYTHONUNBUFFERED=1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
@@ -10,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         xz-utils \
         python3 \
         python3-redis \
+        supervisor \
         libegl1 \
         libgl1 \
         libglib2.0-0 \
@@ -34,6 +36,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && blender --version
 
+COPY docker/blender/supervisord.conf /etc/supervisor/supervisord.conf
+
 WORKDIR /tmp
 
-CMD ["python3", "-u", "/tmp/blender/worker.py"]
+CMD ["supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]

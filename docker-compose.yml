@@ -72,6 +72,7 @@ services:
       redis:
         condition: service_healthy
     restart: unless-stopped
+    stop_grace_period: 1m
 
   redis-commander:
     image: ghcr.io/joeferner/redis-commander:latest
