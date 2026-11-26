@@ -31,8 +31,8 @@ services:
 
   postgres:
     image: postgres:18
-    ports:
-      - "5432:5432"
+#    ports:
+#      - "5432:5432"
     environment:
       POSTGRES_DB: "${DB_DATABASE}"
       POSTGRES_USER: "${DB_USERNAME}"
@@ -51,19 +51,23 @@ services:
       timeout: 5s
     restart: unless-stopped
 
-  blender-worker:
+  blender:
     build:
       context: .
       dockerfile: docker/blender/Dockerfile
     # platform: "linux/amd64"
     working_dir: /tmp
     volumes:
-      - .:/tmp
+      - ./blender:/tmp/blender
+      - ./storage/app:/tmp/storage/app
     environment:
-      - REDIS_URL=redis://redis:6379/0
-      - CONVERT_QUEUE=convert:jobs
-      - CONVERT_RESULT_QUEUE=convert:results
-      - CONVERT_TIMEOUT=600
+      REDIS_URL: "redis://redis:6379/0"
+      BLENDER_QUEUE: "laravel-database-model:blender"
+      SAVER_QUEUE: "laravel-database-model:saver"
+      STATUS_PREFIX: "laravel-database-model:status:"
+      MODEL_OBJ_DIR_PREFIX: "/tmp/storage/app/private/model/"
+      MODEL_GLB_DIR_PREFIX: "/tmp/storage/app/public/model/"
+      CONVERT_TIMEOUT: 600
     depends_on:
       redis:
         condition: service_healthy

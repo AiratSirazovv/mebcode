@@ -13,6 +13,6 @@ class PushCommand extends Command
 {
     public function handle(ObjToGlbDispatcher $dispatcher)
     {
-        $dispatcher->dispatch();
+        $dispatcher->dispatch('abc', 'shelf.obj');
     }
 }
