@@ -1,0 +1,54 @@
+# Coordinates
+BAZIS_EXE = {
+    "x": 1182,
+    "y": 1057
+}
+
+BAZIS_OPEN_FILE = {
+    "x": 57,
+    "y": 61
+}
+
+BAZIS_EXPORT_FILE = {
+    "x": 30,
+    "y": 36
+}
+
+BAZIS_EXPORT = {
+    "x": 130,
+    "y": 467
+}
+
+BAZIS_EXPORT_3D_MODEL = {
+    "x": 335,
+    "y": 494
+}
+
+BAZIS_CLOSE_MODEL = {
+    "x": 1906,
+    "y": 35
+}
+
+# Regions
+BAZIS_IS_OPENED_ICON_REGION = (2, 2, 18, 18)
+BAZIS_IS_OPENED_ICON_RGB = (89, 165, 225)
+
+BAZIS_IS_READY_REGION = (435, 411, 25, 8)
+BAZIS_IS_READY_RGB = (116, 118, 124)
+
+BAZIS_ENTER_FILE_NAME_REGION = (595, 214, 16, 16)
+BAZIS_ENTER_FILE_NAME_RGB = (61, 151, 222)
+
+BAZIS_IS_MODEL_OPENED_REGION = (6, 662, 18, 18)
+BAZIS_IS_MODEL_OPENED_RGB = (124, 91, 68)
+
+BAZIS_EXPORT_FILE_REGION = (19, 81, 9, 9)
+BAZIS_EXPORT_FILE_RGB = (242, 231, 135)
+
+BAZIS_EXPORT_REGION = (331, 487, 10, 10)
+BAZIS_EXPORT_RGB = (174, 172, 173)
+
+BAZIS_EXPORT_3D_MODEL_REGION = (534, 358, 16, 16)
+BAZIS_EXPORT_3D_MODEL_RGB = (63, 152, 222)
+
+# C:\Users\Airat\Documents\shared_test\model\abc\bazis\Шкаф.b3d
